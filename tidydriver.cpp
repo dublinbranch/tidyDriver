@@ -10,12 +10,17 @@ QByteArray TidyDriver::cleanse1(const QByteArray& original) {
 	TidyBuffer output = {0};
 	TidyBuffer errbuf = {0};
 	int        rc     = -1;
-	bool       ok;
+    bool       ok;
 
 	TidyDoc tdoc = tidyCreate(); // Initialize "document"
 
-	ok = tidyOptSetBool(tdoc, TidyXhtmlOut, yes); // Convert to XHTML
-	ok &= tidyOptSetBool(tdoc, TidyDropEmptyElems, yes);
+    ok = tidyOptSetBool(tdoc, TidyXhtmlOut, yes); // Convert to XHTML
+    ok &= tidyOptSetBool(tdoc, TidyDropEmptyElems, yes);
+    ok &= tidyOptSetBool(tdoc, TidyIndentContent, yes);
+
+    //why wrapping ???
+    ok &= tidyOptSetInt(tdoc, TidyWrapLen, 9999);
+
 	if (ok)
 		rc = tidySetErrorBuffer(tdoc, &errbuf); // Capture diagnostics
 	if (rc >= 0)
