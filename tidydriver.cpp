@@ -7,8 +7,8 @@ TidyDriver::TidyDriver() {
 }
 
 QByteArray TidyDriver::cleanse1(const QByteArray& original) {
-	TidyBuffer output = {0};
-	TidyBuffer errbuf = {0};
+    TidyBuffer output = {0,nullptr,0,0,0};
+    TidyBuffer errbuf = {0,nullptr,0,0,0};
 	int        rc     = -1;
     bool       ok;
 
